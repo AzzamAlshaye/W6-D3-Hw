@@ -14,6 +14,7 @@ export default function BookTravel() {
     { id: "checkIn", label: "Check-in", icon: <FaCheckCircle /> },
     { id: "trips", label: "My trips", icon: <FaSuitcase /> },
   ];
+
   const SUB_TABS = [
     { id: "flight", label: "Flight" },
     { id: "packages", label: "Packages" },
@@ -21,8 +22,12 @@ export default function BookTravel() {
     { id: "car", label: "Car" },
   ];
 
+  // Primary tab state
   const [activePrimary, setActivePrimary] = useState("book");
+  // Sub-tab state for Book tab
   const [activeSub, setActiveSub] = useState("flight");
+
+  // Shared booking form state
   const [flightType, setFlightType] = useState("roundTrip");
   const [award, setAward] = useState(false);
   const [flexible, setFlexible] = useState(false);
@@ -33,51 +38,180 @@ export default function BookTravel() {
   const [passengers, setPassengers] = useState(1);
   const [cabin, setCabin] = useState("Economy");
 
+  // Flight status state
+  const [statusOrigin, setStatusOrigin] = useState("");
+  const [statusDest, setStatusDest] = useState("");
+  const [flightNumber, setFlightNumber] = useState("");
+  const [statusDate, setStatusDate] = useState("");
+
+  // Check-in state
+  const [confNum, setConfNum] = useState("");
+  const [checkLastName, setCheckLastName] = useState("");
+
+  // My trips state
+  const [tripConf, setTripConf] = useState("");
+  const [tripLastName, setTripLastName] = useState("");
+
   const swapLocations = () => {
     setOrigin(destination);
     setDestination(origin);
   };
 
-  const handleFindFlights = (e) => {
+  const handleBooking = (e) => {
     e.preventDefault();
-    // Your search handler here
   };
+  const handleStatusSearch = (e) => {
+    e.preventDefault();
+  };
+  const handleCheckin = (e) => {
+    e.preventDefault();
+  };
+  const handleTripSearch = (e) => {
+    e.preventDefault();
+  };
+
+  // Reusable booking form for Flight/Packages/Hotel/Car
+  const BookingForm = () => (
+    <form onSubmit={handleBooking} className="space-y-4">
+      <div className="flex flex-wrap items-center space-x-4">
+        <label className="flex items-center space-x-2">
+          <input
+            type="radio"
+            value="roundTrip"
+            checked={flightType === "roundTrip"}
+            onChange={() => setFlightType("roundTrip")}
+          />
+          <span>Roundtrip</span>
+        </label>
+        <label className="flex items-center space-x-2">
+          <input
+            type="radio"
+            value="oneWay"
+            checked={flightType === "oneWay"}
+            onChange={() => setFlightType("oneWay")}
+          />
+          <span>One-way</span>
+        </label>
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={award}
+            onChange={() => setAward(!award)}
+          />
+          <span>Book with miles</span>
+        </label>
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={flexible}
+            onChange={() => setFlexible(!flexible)}
+          />
+          <span>Flexible dates</span>
+        </label>
+      </div>
+      <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+        <input
+          type="text"
+          placeholder="Origin"
+          value={origin}
+          onChange={(e) => setOrigin(e.target.value)}
+          className="flex-1 border rounded px-3 py-2"
+          required
+        />
+        <button
+          type="button"
+          onClick={swapLocations}
+          className="self-center text-blue-600"
+          aria-label="Swap origin and destination"
+        >
+          <FaExchangeAlt />
+        </button>
+        <input
+          type="text"
+          placeholder="Destination"
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
+          className="flex-1 border rounded px-3 py-2"
+          required
+        />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input
+          type="text"
+          placeholder="Jul 18 - Jul 20"
+          value={departDate}
+          onChange={(e) => setDepartDate(e.target.value)}
+          className="border rounded px-3 py-2"
+          required
+        />
+        <input
+          type="text"
+          placeholder="1 Adult"
+          value={`${passengers} Adult`}
+          onChange={(e) => setPassengers(Number(e.target.value))}
+          className="border rounded px-3 py-2"
+        />
+      </div>
+      <select
+        value={cabin}
+        onChange={(e) => setCabin(e.target.value)}
+        className="border rounded px-3 py-2 w-full md:w-auto"
+      >
+        <option>Economy</option>
+        <option>Premium economy</option>
+        <option>Business or First</option>
+      </select>
+      <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+        <button
+          type="submit"
+          className="flex-1 bg-blue-600 text-white py-2 rounded w-full md:w-auto"
+        >
+          Find flights
+        </button>
+        <button
+          type="button"
+          className="flex-1 border border-blue-600 text-blue-600 py-2 rounded w-full md:w-auto"
+        >
+          Find your travel credits
+        </button>
+      </div>
+    </form>
+  );
 
   return (
     <div>
       {/* Primary tabs */}
-      <div className="flex space-x-2 mb-4" role="tablist">
+      <div className="flex space-x-2 mb-6" role="tablist">
         {PRIMARY_TABS.map((tab) => (
           <button
             key={tab.id}
             role="tab"
             onClick={() => setActivePrimary(tab.id)}
-            className={`flex-1 flex items-center justify-center p-2 rounded-t-lg border-b-2 ${
+            className={`flex-1 flex items-center justify-center py-2 px-4 rounded-t-lg border-b-2 text-sm font-medium ${
               activePrimary === tab.id
-                ? "border-blue-600 text-blue-600"
-                : "border-transparent text-gray-600"
+                ? "border-blue-600 text-blue-600 bg-white"
+                : "border-transparent text-gray-600 bg-gray-100"
             }`}
           >
             <span className="mr-1">{tab.icon}</span>
-            <span>{tab.label}</span>
+            {tab.label}
           </button>
         ))}
       </div>
 
-      {/* Tab panels */}
+      {/* Book panel */}
       {activePrimary === "book" && (
         <div>
-          {/* Sub tabs */}
           <div className="flex space-x-2 mb-4" role="tablist">
             {SUB_TABS.map((tab) => (
               <button
                 key={tab.id}
                 role="tab"
                 onClick={() => setActiveSub(tab.id)}
-                className={`flex-1 text-center py-1 rounded-lg ${
+                className={`flex-1 text-center py-1 rounded-lg text-sm ${
                   activeSub === tab.id
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200 text-gray-700"
+                    ? "bg-white text-black border-b-2 border-black"
+                    : "bg-gray-100 text-gray-700"
                 }`}
               >
                 {tab.label}
@@ -87,166 +221,165 @@ export default function BookTravel() {
               href="https://cruises.united.com"
               target="_blank"
               rel="noopener"
-              className="ml-2 flex items-center px-3 py-1 bg-transparent text-blue-600 hover:underline"
+              className="ml-2 flex items-center text-blue-600 text-sm hover:underline"
             >
-              Cruise <span className="ml-1">↗</span>
+              Cruise ↗
             </a>
           </div>
-
-          {/* Flight form */}
-          {activeSub === "flight" && (
-            <form onSubmit={handleFindFlights}>
-              {/* Flight type */}
-              <div className="flex mb-4">
-                <label className="mr-4 flex items-center">
-                  <input
-                    type="radio"
-                    value="roundTrip"
-                    checked={flightType === "roundTrip"}
-                    onChange={() => setFlightType("roundTrip")}
-                    className="mr-1"
-                  />
-                  Roundtrip
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    value="oneWay"
-                    checked={flightType === "oneWay"}
-                    onChange={() => setFlightType("oneWay")}
-                    className="mr-1"
-                  />
-                  One-way
-                </label>
-              </div>
-
-              {/* Checkboxes */}
-              <div className="flex mb-4 space-x-4">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={award}
-                    onChange={() => setAward(!award)}
-                    className="mr-1"
-                  />
-                  Book with miles
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={flexible}
-                    onChange={() => setFlexible(!flexible)}
-                    className="mr-1"
-                  />
-                  Flexible dates
-                </label>
-              </div>
-
-              {/* Origin & Destination */}
-              <div className="flex mb-4 space-x-2">
-                <input
-                  type="text"
-                  placeholder="From"
-                  value={origin}
-                  onChange={(e) => setOrigin(e.target.value)}
-                  className="flex-1 border px-3 py-2 rounded"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={swapLocations}
-                  className="p-2 bg-gray-200 rounded"
-                  aria-label="Swap origin and destination"
-                >
-                  <FaExchangeAlt />
-                </button>
-                <input
-                  type="text"
-                  placeholder="To"
-                  value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
-                  className="flex-1 border px-3 py-2 rounded"
-                  required
-                />
-              </div>
-
-              {/* Dates */}
-              <div className="flex mb-4 space-x-2">
-                <input
-                  type="text"
-                  placeholder="Departure"
-                  value={departDate}
-                  onChange={(e) => setDepartDate(e.target.value)}
-                  className="flex-1 border px-3 py-2 rounded"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Return"
-                  value={returnDate}
-                  onChange={(e) => setReturnDate(e.target.value)}
-                  className="flex-1 border px-3 py-2 rounded"
-                  required={flightType === "roundTrip"}
-                  disabled={flightType === "oneWay"}
-                />
-              </div>
-
-              {/* Passengers & Cabin */}
-              <div className="flex mb-4 space-x-2">
-                <input
-                  type="number"
-                  min="1"
-                  value={passengers}
-                  onChange={(e) => setPassengers(Number(e.target.value))}
-                  className="w-24 border px-3 py-2 rounded"
-                  aria-label="Number of travelers"
-                />
-                <select
-                  value={cabin}
-                  onChange={(e) => setCabin(e.target.value)}
-                  className="flex-1 border px-3 py-2 rounded"
-                  aria-label="Cabin class"
-                >
-                  <option>Economy</option>
-                  <option>Premium economy</option>
-                  <option>Business or First</option>
-                </select>
-              </div>
-
-              {/* Action buttons */}
-              <div className="flex space-x-2 mt-4">
-                <button
-                  type="submit"
-                  className="flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-                >
-                  Find flights
-                </button>
-                <button
-                  type="button"
-                  className="flex-1 border border-blue-600 text-blue-600 py-2 px-4 rounded hover:bg-blue-50"
-                >
-                  Find your travel credits
-                </button>
-              </div>
-            </form>
-          )}
-
-          {/* Placeholder panels for other sub-tabs */}
-          {activeSub !== "flight" && (
-            <div className="py-6 text-gray-500 italic text-center">
-              {SUB_TABS.find((t) => t.id === activeSub)?.label} Search Coming
-              Soon
-            </div>
-          )}
+          <BookingForm />
         </div>
       )}
 
-      {/* Placeholder panels for non-'book' primary tabs */}
-      {activePrimary !== "book" && (
-        <div className="py-6 text-gray-500 italic text-center">
-          {PRIMARY_TABS.find((t) => t.id === activePrimary)?.label} Panel Coming
-          Soon
-        </div>
+      {/* Flight status panel */}
+      {activePrimary === "status" && (
+        <form onSubmit={handleStatusSearch} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium">From</label>
+              <input
+                type="text"
+                placeholder="From"
+                value={statusOrigin}
+                onChange={(e) => setStatusOrigin(e.target.value)}
+                className="w-full border rounded px-3 py-2"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">To</label>
+              <input
+                type="text"
+                placeholder="To"
+                value={statusDest}
+                onChange={(e) => setStatusDest(e.target.value)}
+                className="w-full border rounded px-3 py-2"
+              />
+            </div>
+          </div>
+          <p className="text-sm text-gray-500 italic">and/or</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium">Flight number</label>
+              <input
+                type="text"
+                placeholder="Flight no."
+                value={flightNumber}
+                onChange={(e) => setFlightNumber(e.target.value)}
+                className="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">Date</label>
+              <select
+                value={statusDate}
+                onChange={(e) => setStatusDate(e.target.value)}
+                className="w-full border rounded px-3 py-2"
+              >
+                <option>May 20, 2025</option>
+              </select>
+            </div>
+          </div>
+          <a href="#" className="text-blue-600 text-sm hover:underline">
+            Receive flight status notifications by email or text message
+          </a>
+          <button
+            type="submit"
+            className="mt-4 bg-blue-600 text-white py-2 rounded w-full"
+          >
+            Search
+          </button>
+        </form>
+      )}
+
+      {/* Check-in panel */}
+      {activePrimary === "checkIn" && (
+        <form onSubmit={handleCheckin} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium">
+              Confirmation or ticket number
+            </label>
+            <input
+              type="text"
+              placeholder="Confirmation number"
+              value={confNum}
+              onChange={(e) => setConfNum(e.target.value)}
+              className="w-full border rounded px-3 py-2"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Last name</label>
+            <input
+              type="text"
+              placeholder="Last name"
+              value={checkLastName}
+              onChange={(e) => setCheckLastName(e.target.value)}
+              className="w-full border rounded px-3 py-2"
+              required
+            />
+          </div>
+          <a href="#" className="text-blue-600 text-sm hover:underline">
+            Check in with your MileagePlus number
+          </a>
+          <button
+            type="submit"
+            className="mt-4 bg-blue-600 text-white py-2 rounded w-full"
+          >
+            Search
+          </button>
+          <p className="text-xs text-gray-300">
+            Check-in is available starting 24 hours before your scheduled
+            departure.
+          </p>
+          <a href="#" className="text-blue-600 text-sm hover:underline">
+            Check-in and Airport Processing Times
+          </a>
+        </form>
+      )}
+
+      {/* My trips panel */}
+      {activePrimary === "trips" && (
+        <form onSubmit={handleTripSearch} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium">
+              Confirmation number
+            </label>
+            <input
+              type="text"
+              placeholder="Confirmation number"
+              value={tripConf}
+              onChange={(e) => setTripConf(e.target.value)}
+              className="w-full border rounded px-3 py-2"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Last name</label>
+            <input
+              type="text"
+              placeholder="Last name"
+              value={tripLastName}
+              onChange={(e) => setTripLastName(e.target.value)}
+              className="w-full border rounded px-3 py-2"
+              required
+            />
+          </div>
+          <a href="#" className="text-blue-600 text-sm hover:underline">
+            Find your travel credits ➔
+          </a>
+          <button
+            type="submit"
+            className="mt-4 bg-blue-600 text-white py-2 rounded w-full"
+          >
+            Search
+          </button>
+          <p className="text-sm text-gray-300">
+            Looking for past or canceled flights?{" "}
+            <a href="#" className="text-blue-600 hover:underline">
+              Sign in.
+            </a>
+          </p>
+        </form>
       )}
     </div>
   );
