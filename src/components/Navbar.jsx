@@ -113,7 +113,7 @@ export default function Navbar() {
           />
 
           {/* panel */}
-          <div className="relative w-full max-w-full bg-white ">
+          <div className="relative w-full max-w-full bg-white">
             {/* close */}
             <button
               onClick={() => setMobileOpen(false)}
@@ -122,57 +122,66 @@ export default function Navbar() {
             >
               <FaTimes />
             </button>
-
             {/* logo + language */}
-            <div className="flex items-end justify-start mb-6 bg-[#1314d2] p-9">
+            <div className="flex items-end justify-start mb-1 bg-[#1314d2] p-9">
               <img
                 src="https://www.united.com/2500e4e62233fbfe8ac6.unitedLogoNew.svg"
                 alt="United logo"
                 className="h-12 absolute top-6 left-0 "
               />
             </div>
-            <button className="ml-4 flex items-center text-sm font-medium text-gray-700 hover:text-gray-900">
-              <FaGlobe className="mr-1" />
-              English – US $
-            </button>
-            {/* search */}
-            <form className="mb-6 flex">
-              <input
-                type="search"
-                placeholder="Search united.com"
-                className="flex-1 border border-gray-300 rounded-l px-3 py-2 text-sm focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-blue-600 text-white px-4 py-2 rounded-r text-sm"
-              >
-                Search
-              </button>
-            </form>
-
-            {/* menu items */}
-            <nav className="flex flex-col space-y-2">
-              {PRIMARY_ITEMS.map(({ label, hasDropdown, isLink }) => (
-                <button
-                  key={label}
-                  className="flex justify-between items-center w-full text-left py-2 text-gray-700 hover:bg-gray-100 rounded"
-                >
-                  <span>{label}</span>
-                  {isLink ? (
-                    <FaCaretRight className="text-xs" />
-                  ) : hasDropdown ? (
-                    <FaCaretDown className="text-xs" />
-                  ) : null}
+            {/* inner div for mobile  */}
+            <div className="p-5 flex flex-col justify-center">
+              <div className="flex justify-center">
+                <button className="ml-4 flex items-center text-sm font-medium text-[#1314d2] hover:text-gray-900">
+                  <FaGlobe className="mr-1" />
+                  English – US $
                 </button>
-              ))}
+              </div>
 
-              <a
-                href="/en/us/fly/help-center.html"
-                className="mt-4 flex items-center text-blue-600 font-medium"
-              >
-                Help <FaCaretRight className="ml-1 text-xs" />
-              </a>
-            </nav>
+              {/* search */}
+              <div className="flex flex-col gap-6">
+                <h1 className="font-semibold text-2xl">Menu</h1>
+                <p>Search united.com</p>
+              </div>
+
+              <form className="mb-4 flex border-b-1 py-4 border-b-[#d7d7d4]">
+                <input
+                  type="search"
+                  placeholder="Search united.com"
+                  className="flex-0 border border-gray-300 rounded-xl px-2 py-2 text-sm focus:outline-none mr-5 font-bold italic "
+                />
+                <button
+                  type="submit"
+                  className="bg-blue-600 text-white px-4 py-3 rounded-2xl text-sm"
+                >
+                  Search
+                </button>
+              </form>
+              {/* menu items */}
+              <nav className="flex flex-col space-y-2">
+                {PRIMARY_ITEMS.map(({ label, hasDropdown, isLink }) => (
+                  <button
+                    key={label}
+                    className="flex justify-between items-center w-full text-left py-2 text-gray-700 hover:bg-gray-100  border-b-2 border-b-[#d7d7d4]"
+                  >
+                    <span className="font-bold text-black">{label}</span>
+                    {isLink ? (
+                      <FaCaretRight className="text-xs" />
+                    ) : hasDropdown ? (
+                      <FaCaretDown className="text-xs" />
+                    ) : null}
+                  </button>
+                ))}
+
+                <a
+                  href="#"
+                  className="mt-4 flex items-center text-blue-600 font-medium"
+                >
+                  Help <FaCaretRight className="ml-1 text-xs" />
+                </a>
+              </nav>
+            </div>
           </div>
         </div>
       )}
