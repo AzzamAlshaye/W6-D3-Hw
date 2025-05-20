@@ -4,6 +4,7 @@ import hero1 from "../assets/hero-images/hero-1.jpg";
 import hero2 from "../assets/hero-images/hero-2.jpg";
 import hero3 from "../assets/hero-images/hero-3.jpg";
 import hero4 from "../assets/hero-images/hero-4.jpg";
+import { IoIosPause } from "react-icons/io";
 
 const IMAGES = [
   "https://media.united.com/assets/m/178313ba33aca8b4/original/1265_Starlink_HP_Takeover_Desktop_img_1366x768-2x.jpg",
@@ -69,7 +70,12 @@ export default function Carousel() {
       />
 
       {/* Overlay panel */}
-      <div className="absolute top-0 right-0 m-8 bg-black bg-opacity-60 text-white p-8 rounded-lg max-w-md">
+      <div
+        className="absolute top-20 right-72 m-8
+             bg-black/50
+             text-white
+             p-4 w-80 rounded-lg max-w-md"
+      >
         <article
           aria-labelledby="carousel-homepage-title"
           aria-describedby="carousel-homepage-desc"
@@ -91,7 +97,7 @@ export default function Carousel() {
               type="button"
               id="carousel-homepage-link"
               role="link"
-              className="mt-4 inline-flex items-center font-medium hover:underline"
+              className="mt-2 inline-flex items-center font-medium hover:underline"
             >
               {slide.linkText}
             </button>
@@ -106,7 +112,7 @@ export default function Carousel() {
               }
               className="text-white text-xl"
             >
-              {/* Pause/Play icon could toggle, static here */}⏸
+              <IoIosPause />
             </button>
             {IMAGES.map((_, i) => (
               <span

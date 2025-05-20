@@ -4,7 +4,7 @@ import Carousel from "./Carousel";
 
 export default function Hero() {
   return (
-    <section className="relative bg-[#01164F] text-white mt-16 overflow-hidden">
+    <section className="relative text-white mt-16 overflow-hidden">
       {/* Full-section background carousel */}
       <Carousel />
 

@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
     <>
       {/* ─── Desktop / Tablet Header ─────────────────────────────────────────── */}
-      <header className="fixed top-0 left-0 w-full h-16  bg-black  bg-opacity-30 backdrop-blur-lg">
+      <header className="fixed top-0 left-0 w-full h-16  bg-black  backdrop-blur-lg  z-50 ">
         <div className="container mx-auto flex items-center justify-between lg:justify-evenly h-16 px-4">
           <div className="flex gap-5">
             <a href="/" className="flex-shrink-0">
