@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
     <>
       {/* ─── Desktop / Tablet Header ─────────────────────────────────────────── */}
-      <header className="fixed top-0 left-0 w-full h-16  bg-black  bg-opacity-30 backdrop-blur-md">
+      <header className="fixed top-0 left-0 w-full h-16  bg-black  bg-opacity-30 backdrop-blur-lg">
         <div className="container mx-auto flex items-center justify-between lg:justify-evenly h-16 px-4">
           <div className="flex gap-5">
             <a href="/" className="flex-shrink-0">
@@ -35,7 +35,7 @@ export default function Navbar() {
               />
             </a>
             {/* Primary nav (md+) */}
-            <nav aria-label="primary" className="hidden md:flex space-x-6">
+            <nav aria-label="primary" className="hidden lg:flex space-x-6">
               {PRIMARY_ITEMS.map(({ label, hasDropdown, isLink }) =>
                 isLink ? (
                   <a
@@ -59,43 +59,47 @@ export default function Navbar() {
             </nav>
           </div>
 
-          {/* Secondary actions (md+) */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="flex justify-end  gap-2">
+            {/* Secondary actions (md+) */}
+            <div className="flex items-center space-x-4">
+              <button
+                className="  hidden lg:flex items-center space-x-1 text-white  py-2 px-1 rounded-2xl hover:bg-[#93b7f8]  hover:text-black  active:ring-[#8fb3f1]  active:border-4 active:border-white"
+                aria-label="Language selector"
+              >
+                <FaGlobe />
+                <span className="text-sm font-bold hidden md:block">
+                  English – US $
+                </span>
+              </button>
+              <button
+                aria-label="Search"
+                className=" text-white p-1 rounded-2xl hover:bg-[#93b7f8] hover:text-black "
+              >
+                <FaSearch />
+              </button>
+              <button
+                aria-label="Sign in"
+                className=" text-white p-1 rounded-2xl hover:bg-[#93b7f8] hover:text-black "
+              >
+                <FaUser />
+              </button>
+              <button
+                aria-label="View cart"
+                className=" text-white p-1 rounded-2xl hover:bg-[#93b7f8] hover:text-black "
+              >
+                <FaShoppingCart />
+              </button>
+            </div>
+
+            {/* Mobile menu button */}
             <button
-              className="flex items-center space-x-1 text-white  py-2 px-1 rounded-2xl hover:bg-[#93b7f8]  hover:text-black  active:ring-[#8fb3f1]  active:border-4 active:border-white"
-              aria-label="Language selector"
+              onClick={() => setMobileOpen(true)}
+              className="lg:hidden text-white hover:text-black"
+              aria-label="Open main menu"
             >
-              <FaGlobe />
-              <span className="text-sm font-bold">English – US $</span>
-            </button>
-            <button
-              aria-label="Search"
-              className=" text-white p-1 rounded-2xl hover:bg-[#93b7f8] hover:text-black "
-            >
-              <FaSearch />
-            </button>
-            <button
-              aria-label="Sign in"
-              className=" text-white p-1 rounded-2xl hover:bg-[#93b7f8] hover:text-black "
-            >
-              <FaUser />
-            </button>
-            <button
-              aria-label="View cart"
-              className=" text-white p-1 rounded-2xl hover:bg-[#93b7f8] hover:text-black "
-            >
-              <FaShoppingCart />
+              <FaBars size={20} />
             </button>
           </div>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMobileOpen(true)}
-            className="md:hidden text-gray-700 hover:text-gray-900"
-            aria-label="Open main menu"
-          >
-            <FaBars size={20} />
-          </button>
         </div>
       </header>
 
@@ -109,29 +113,28 @@ export default function Navbar() {
           />
 
           {/* panel */}
-          <div className="relative w-64 max-w-full bg-white p-4">
+          <div className="relative w-full max-w-full bg-white ">
             {/* close */}
             <button
               onClick={() => setMobileOpen(false)}
-              className="absolute top-4 right-4 text-gray-700 hover:text-gray-900"
+              className="absolute top-6 text-2xl right-4 bg-white hover:text-gray-900"
               aria-label="Close menu"
             >
               <FaTimes />
             </button>
 
             {/* logo + language */}
-            <div className="flex items-center mb-6">
+            <div className="flex items-end justify-start mb-6 bg-[#1314d2] p-9">
               <img
-                src="/2500e4e62233fbfe8ac6.unitedLogoNew.svg"
+                src="https://www.united.com/2500e4e62233fbfe8ac6.unitedLogoNew.svg"
                 alt="United logo"
-                className="h-8"
+                className="h-12 absolute top-6 left-0 "
               />
-              <button className="ml-4 flex items-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                <FaGlobe className="mr-1" />
-                English – US $
-              </button>
             </div>
-
+            <button className="ml-4 flex items-center text-sm font-medium text-gray-700 hover:text-gray-900">
+              <FaGlobe className="mr-1" />
+              English – US $
+            </button>
             {/* search */}
             <form className="mb-6 flex">
               <input
