@@ -11,7 +11,7 @@ export default function Explore() {
   const [listOpen, setListOpen] = useState(false);
 
   return (
-    <div className="container mx-auto px-4 lg:px-50 py-8 space-y-6">
+    <div className="mx-auto px-4 py-8 space-y-6 max-w-full lg:max-w-5xl">
       {/* Header */}
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold">Explore destinations</h1>

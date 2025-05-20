@@ -87,7 +87,7 @@ export default function Links() {
   const next = () => setSlideIndex((i) => (i + 1) % total);
 
   return (
-    <div className="container mx-auto px-4 lg:px-80 py-8 space-y-12">
+    <div className="container mx-auto px-4  py-8 space-y-12 max-w-full lg:max-w-5xl">
       {/* Useful links */}
       <div>
         <h3 className="text-2xl font-semibold mb-6">Useful links for you</h3>
