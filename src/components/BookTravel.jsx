@@ -226,10 +226,10 @@ export default function BookTravel() {
                 key={tab.id}
                 role="tab"
                 onClick={() => setActiveSub(tab.id)}
-                className={`flex-1 text-center py-1 rounded-lg text-sm ${
+                className={`flex-1 text-center py-1  text-sm ${
                   activeSub === tab.id
-                    ? "bg-white text-black border-b-2 border-black"
-                    : "bg-gray-100 text-gray-700"
+                    ? "bg-white text-black border-b-1 border-black"
+                    : " text-gray-700"
                 }`}
               >
                 {tab.label}

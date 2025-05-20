@@ -71,7 +71,7 @@ export default function Carousel() {
 
       {/* Overlay panel */}
       <div
-        className="absolute top-20 right-72 m-8
+        className="absolute lg:top-20  lg:right-72 m-8
              bg-black/50
              text-white
              p-4 w-80 rounded-lg max-w-md"
@@ -128,7 +128,7 @@ export default function Carousel() {
       <img
         src="https://apps.rokt.com/userfiles/7325596850474455043.gif"
         alt="card gif"
-        className="absolute bottom-10 right-80 w-100 h-28  pointer-events-none"
+        className="absolute bottom-10 right-80 w-100 h-28 pointer-events-none hidden lg:block"
       />
     </div>
   );
