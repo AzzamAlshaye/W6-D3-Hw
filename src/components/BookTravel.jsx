@@ -219,7 +219,7 @@ export default function BookTravel() {
 
       {/* Book panel */}
       {activePrimary === "book" && (
-        <div>
+        <div className="p-5">
           <div className="flex space-x-2 mb-4" role="tablist">
             {SUB_TABS.map((tab) => (
               <button
@@ -250,7 +250,7 @@ export default function BookTravel() {
 
       {/* Flight status panel */}
       {activePrimary === "status" && (
-        <form onSubmit={handleStatusSearch} className="space-y-4">
+        <form onSubmit={handleStatusSearch} className="space-y-4 p-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium">From</label>
@@ -311,7 +311,7 @@ export default function BookTravel() {
 
       {/* Check-in panel */}
       {activePrimary === "checkIn" && (
-        <form onSubmit={handleCheckin} className="space-y-4">
+        <form onSubmit={handleCheckin} className="space-y-4 p-5">
           <div>
             <label className="block text-sm font-medium">
               Confirmation or ticket number
@@ -357,7 +357,7 @@ export default function BookTravel() {
 
       {/* My trips panel */}
       {activePrimary === "trips" && (
-        <form onSubmit={handleTripSearch} className="space-y-4">
+        <form onSubmit={handleTripSearch} className="space-y-4 p-5">
           <div>
             <label className="block text-sm font-medium">
               Confirmation number
