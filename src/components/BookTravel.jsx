@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
+import { IoWalletSharp } from "react-icons/io5";
 import {
   FaPlane,
   FaClock,
@@ -161,19 +164,34 @@ export default function BookTravel() {
         <option>Premium economy</option>
         <option>Business or First</option>
       </select>
-      <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-        <button
-          type="submit"
-          className="flex-1 bg-blue-600 text-white py-2 rounded w-full md:w-auto"
-        >
-          Find flights
-        </button>
-        <button
-          type="button"
-          className="flex-1 border border-blue-600 text-blue-600 py-2 rounded w-full md:w-auto"
-        >
-          Find your travel credits
-        </button>
+      <div className="w-full flex lg:flex-row flex-col justify-between ">
+        <p className="text-sm ">
+          <p className="text-blue-700 font-bold ">
+            Advanced search <IoIosArrowForward />
+          </p>
+          <span className="text-[0.6rem]">
+            (Certificates, multi-city and upgrades)
+          </span>
+          <p className="text-[0.6rem]">
+            <span className="text-blue-700">Changed bag rules</span> and
+            <span className="text-blue-700"> fees for optional services</span>
+          </p>
+        </p>
+
+        <div className="flex flex-col  space-y-4 lg:space-y-2 w-50  ">
+          <button
+            type="submit"
+            className="flex-1 bg-[#1315d2] text-white py-2 rounded-2xl w-full md:w-auto"
+          >
+            Find flights
+          </button>
+          <button
+            type="button"
+            className="flex justify-center items-center gap-2 border border-blue-600 text-[#1315d2] py-2 rounded-2xl w-full md:w-auto "
+          >
+            <IoWalletSharp className="text-sm" /> Find your travel credits
+          </button>
+        </div>
       </div>
     </form>
   );
@@ -181,16 +199,16 @@ export default function BookTravel() {
   return (
     <div>
       {/* Primary tabs */}
-      <div className="flex space-x-2 mb-6" role="tablist">
+      <div className="flex space-x-0.5 mb-6 w-full" role="tablist">
         {PRIMARY_TABS.map((tab) => (
           <button
             key={tab.id}
             role="tab"
             onClick={() => setActivePrimary(tab.id)}
-            className={`flex-1 flex items-center justify-center py-2 px-4 rounded-t-lg border-b-2 text-sm font-medium ${
+            className={`flex-1 flex items-center justify-center py-4   text-sm font-medium ${
               activePrimary === tab.id
-                ? "border-blue-600 text-blue-600 bg-white"
-                : "border-transparent text-gray-600 bg-gray-100"
+                ? " text-black bg-white"
+                : "border-transparent text-white bg-[#002244]"
             }`}
           >
             <span className="mr-1">{tab.icon}</span>
@@ -221,9 +239,9 @@ export default function BookTravel() {
               href="https://cruises.united.com"
               target="_blank"
               rel="noopener"
-              className="ml-2 flex items-center text-blue-600 text-sm hover:underline"
+              className="ml-2 gap-1 flex items-center text-blue-600 text-sm hover:underline"
             >
-              Cruise ↗
+              Cruise <FaExternalLinkAlt />
             </a>
           </div>
           <BookingForm />
