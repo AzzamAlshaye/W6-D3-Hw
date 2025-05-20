@@ -62,49 +62,49 @@ const bottomLinks = [
 
 export default function Footer() {
   return (
-    <footer className="mt-12 text-white ">
+    <footer className="mt-12 text-white">
       {/* 1) Dark-blue Popular Topics */}
       <div className="bg-[#011840] py-12">
-        <div className="container mx-auto px-50 flex flex-col lg:flex-row justify-between items-start lg:items-center">
-          {/* Left: topics grid */}
-          <div className="flex-1">
+        <div className="mx-auto px-4 max-w-full lg:max-w-7xl">
+          {/* Header + search */}
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
             <h2 className="text-2xl font-semibold text-white">
               Popular topics
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 mt-6">
-              {popularTopics.map(({ title, href, Icon }) => (
-                <a
-                  key={title}
-                  href={href}
-                  className="flex items-center space-x-2 text-white hover:underline"
-                >
-                  <Icon className="w-5 h-5" />
-                  <span>{title}</span>
-                </a>
-              ))}
+            <div className="w-full lg:w-1/3 mt-4 lg:mt-0">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search united"
+                  className="w-full h-12 pl-12 pr-4 rounded-lg text-black bg-white focus:outline-none focus:ring"
+                />
+                <button className="absolute inset-y-0 left-4 flex items-center justify-center text-black">
+                  <FiSearch size={20} />
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Right: search box */}
-          <div className="mt-8 lg:mt-0 w-full lg:w-1/4">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search united"
-                className="w-full h-12 pl-4 pr-12 rounded-lg text-black"
-              />
-              <button className="absolute top-1/2 right-4 -translate-y-1/2 text-white">
-                <FiSearch size={24} />
-              </button>
-            </div>
+          {/* Topics grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 mt-8">
+            {popularTopics.map(({ title, href, Icon }) => (
+              <a
+                key={title}
+                href={href}
+                className="flex items-center space-x-2 text-white hover:underline"
+              >
+                <Icon className="w-5 h-5 flex-shrink-0" />
+                <span>{title}</span>
+              </a>
+            ))}
           </div>
         </div>
       </div>
 
       {/* 2) Light-gray nav bar */}
       <div className="bg-gray-100">
-        <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between text-sm text-[#1d09ff]">
-          <nav className="flex flex-wrap gap-6">
+        <div className="mx-auto px-4 py-4 max-w-full lg:max-w-7xl flex flex-col md:flex-row items-center justify-between text-sm text-[#1d09ff] gap-y-4 md:gap-y-0">
+          <nav className="flex flex-wrap gap-4 md:gap-6 justify-center">
             {grayNav.map(({ title, href, external }) => (
               <a
                 key={title}
@@ -120,7 +120,7 @@ export default function Footer() {
           </nav>
           <a
             href="#"
-            className="mt-4 md:mt-0 flex items-center text-sm text-[#1d09ff] hover:underline"
+            className="flex items-center hover:underline text-[#1d09ff]"
           >
             <FiInfo className="mr-2" />
             Important notices
@@ -130,22 +130,22 @@ export default function Footer() {
 
       {/* 3) Black section */}
       <div className="bg-black py-8">
-        <div className="container mx-auto px-4 space-y-8">
-          {/* Search button + locale/social */}
-          <div className="flex flex-col md:flex-row items-center justify-between">
+        <div className="mx-auto px-4 max-w-full lg:max-w-6xl space-y-8">
+          {/* Search + locale/social */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-y-4 md:gap-y-0">
             <button className="flex items-center space-x-2 bg-white text-[#1d09ff] px-6 py-3 rounded-full hover:bg-gray-200 transition">
               <FiSearch />
               <span>Search</span>
             </button>
-            <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mt-4 md:mt-0 text-white">
+            <div className="flex flex-col md:flex-row items-center justify-center md:justify-end w-full md:w-auto space-y-4 md:space-y-0 md:space-x-6 text-white">
               <div className="flex items-center space-x-2">
                 <FiGlobe />
                 <span>English – United States $</span>
                 <FiExternalLink size={14} />
+                <a href="#" className="hover:underline">
+                  Español
+                </a>
               </div>
-              <a href="#" className="hover:underline">
-                Español
-              </a>
               <div className="flex items-center space-x-4 text-xl">
                 <FaTiktok />
                 <FaFacebookF />
@@ -158,7 +158,7 @@ export default function Footer() {
           </div>
 
           {/* Legal links */}
-          <div className="flex flex-wrap gap-4 text-xs text-white">
+          <div className="flex flex-wrap gap-4 text-xs text-white justify-center md:justify-start">
             {bottomLinks.map(({ title, href, external }) => (
               <a
                 key={title}
@@ -174,36 +174,35 @@ export default function Footer() {
           </div>
 
           {/* External legend + logos */}
-          <div className="flex flex-col md:flex-row items-center justify-between text-xs text-gray-400">
-            <div className="flex items-center space-x-1">
+          <div className="flex flex-col lg:flex-row items-center justify-between text-xs text-gray-400 gap-y-4 lg:gap-y-0">
+            <div className="flex items-center space-x-2 text-center lg:text-left">
               <FiExternalLink />
               <span>
                 Indicates an external site that may or may not meet
                 accessibility guidelines.
               </span>
             </div>
-            <div className="flex items-center space-x-6 mt-4 md:mt-0">
+            <div className="flex items-center space-x-4 justify-center lg:justify-end">
               <img
-                src="/UnitedLogoInverted.svg"
+                src="https://www.united.com/3149651732b3c9591453.UnitedLogoInverted.svg"
                 alt="United logo"
-                className="h-8"
+                className="h-5"
               />
               <img
-                src="/StarAlliance.svg"
+                src="https://www.united.com/dd45368f41b2bc6e1df9.StarAlliance.svg"
                 alt="Star Alliance logo"
-                className="h-6"
+                className="h-5"
               />
             </div>
           </div>
         </div>
-      </div>
-
-      {/* 4) CoBrowse button */}
-      <div className="relative">
-        <button className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-[#1d09ff] px-6 py-3 rounded-full shadow-lg hover:bg-gray-200 transition flex items-center space-x-2">
-          <FiChevronRight />
-          <span>CoBrowse</span>
-        </button>
+        {/* 4) CoBrowse button */}
+        <div className="relative py-8">
+          <button className="absolute left-1/2 transform -translate-x-1/2 bottom-0 bg-white text-[#1d09ff] px-4 py-3 rounded-2xl shadow-lg hover:bg-gray-200 transition flex items-center space-x-2 font-semibold">
+            <FiChevronRight />
+            <span>CoBrowse</span>
+          </button>
+        </div>
       </div>
     </footer>
   );
